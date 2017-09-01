@@ -36,7 +36,6 @@ vertices= (
 
 edges = (
     (0,1),
-    (0,2),
     (0,3),
     (0,4),
     (2,1),
@@ -56,9 +55,14 @@ def Cube():
     for edge in edges:
         for vertex in edge:
             glVertex3fv(vertices[vertex])
-        for vertex in edge:
-            big_vertex = map(lambda x: x * 2, vertices[vertex])
-            glVertex3fv(big_vertex)
+        for babushka in (1,2,3,4,5):
+            for vertex in edge:
+                big_vertex = map(lambda x: x * babushka, vertices[vertex])
+                glVertex3fv(big_vertex)
+            for vertex in edge:
+                big_vertex = map(lambda x: x * babushka, vertices[vertex])
+                glVertex3fv(big_vertex)
+                glVertex3fv(vertices[vertex])
     glEnd()
 
 
@@ -100,7 +104,7 @@ if __name__ == '__main__':
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
     gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
     glTranslatef(0.0,0.0, -5)
-    glScalef(0.5,0.5,0.5)
+    glScalef(0.2,0.2,0.2)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
